@@ -11,7 +11,7 @@ import { UsersProvider } from './components/users-provider'
 import { UsersTable } from './components/users-table'
 import { users } from './data/users'
 
-const route = getRouteApi('/_authenticated/users/')
+const route = getRouteApi('/_authenticated/team/')
 
 export function Users() {
   const search = route.useSearch()
@@ -20,7 +20,7 @@ export function Users() {
   return (
     <UsersProvider>
       <Header fixed>
-        <Search />
+        <Search placeholder='Search team directory' />
         <div className='ms-auto flex items-center space-x-4'>
           <ThemeSwitch />
           <ConfigDrawer />
@@ -31,9 +31,12 @@ export function Users() {
       <Main className='flex flex-1 flex-col gap-4 sm:gap-6'>
         <div className='flex flex-wrap items-end justify-between gap-2'>
           <div>
-            <h2 className='text-2xl font-bold tracking-tight'>User List</h2>
+            <h2 className='text-2xl font-bold tracking-tight'>
+              Team Directory
+            </h2>
             <p className='text-muted-foreground'>
-              Manage your users and their roles here.
+              Review platform operators, delivery ownership, finance coverage,
+              and support access from one table.
             </p>
           </div>
           <UsersPrimaryButtons />

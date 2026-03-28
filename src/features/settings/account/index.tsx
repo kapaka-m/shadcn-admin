@@ -4,9 +4,8 @@ import { AccountForm } from './account-form'
 export function SettingsAccount() {
   return (
     <ContentSection
-      title='Account'
-      desc='Update your account settings. Set your preferred language and
-          timezone.'
+      title='Access'
+      desc='Maintain access review metadata and the primary language for the workspace experience.'
     >
       <AccountForm />
     </ContentSection>

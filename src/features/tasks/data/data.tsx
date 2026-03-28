@@ -1,57 +1,62 @@
 import {
+  AlertCircle,
   ArrowDown,
   ArrowRight,
   ArrowUp,
-  Circle,
   CheckCircle,
-  AlertCircle,
-  Timer,
-  HelpCircle,
+  Circle,
   CircleOff,
+  Landmark,
+  PlugZap,
+  Timer,
+  Workflow,
 } from 'lucide-react'
 
 export const labels = [
   {
-    value: 'bug',
-    label: 'Bug',
+    value: 'governance',
+    label: 'Governance',
+    icon: Landmark,
   },
   {
-    value: 'feature',
-    label: 'Feature',
+    value: 'integration',
+    label: 'Integration',
+    icon: PlugZap,
   },
   {
-    value: 'documentation',
-    label: 'Documentation',
+    value: 'delivery',
+    label: 'Delivery',
+    icon: Workflow,
   },
-]
+] as const
 
 export const statuses = [
   {
-    label: 'Backlog',
+    label: 'Queued',
     value: 'backlog' as const,
-    icon: HelpCircle,
-  },
-  {
-    label: 'Todo',
-    value: 'todo' as const,
     icon: Circle,
   },
   {
-    label: 'In Progress',
+    label: 'Ready',
+    value: 'todo' as const,
+    icon: CheckCircle,
+  },
+  {
+    label: 'Active',
     value: 'in progress' as const,
     icon: Timer,
   },
   {
-    label: 'Done',
+    label: 'Closed',
     value: 'done' as const,
     icon: CheckCircle,
   },
   {
-    label: 'Canceled',
+    label: 'Deferred',
     value: 'canceled' as const,
     icon: CircleOff,
   },
-]
+] as const
 
 export const priorities = [
   {
@@ -74,4 +79,4 @@ export const priorities = [
     value: 'critical' as const,
     icon: AlertCircle,
   },
-]
+] as const

@@ -1,119 +1,49 @@
-# Shadcn Admin Dashboard
+# KAPAKA PLATFORM
 
-Admin Dashboard UI crafted with Shadcn and Vite. Built with responsiveness and accessibility in mind.
+Branded frontend workspace shell for KAPAKA PLATFORM. The codebase now focuses on a smaller, cleaner set of production-facing surfaces:
 
-![alt text](public/images/shadcn-admin.png)
+- Workspace dashboard
+- Operations queue
+- Team directory
+- Integrations and connectors
+- Operational inbox
+- Workspace settings
+- Platform guide
 
-[![Sponsored by Clerk](https://img.shields.io/badge/Sponsored%20by-Clerk-5b6ee1?logo=clerk)](https://go.clerk.com/GttUAaK)
+## Canonical alignment
 
-I've been creating dashboard UIs at work and for my personal projects. I always wanted to make a reusable collection of dashboard UI for future projects; and here it is now. While I've created a few custom components, some of the code is directly adapted from ShadcnUI examples.
+This cleanup used the KAPAKA documentation that was actually present locally during the audit:
 
-> This is not a starter project (template) though. I'll probably make one in the future.
+- `C:\Users\KAPAKA\Desktop\KAPAKA\documents\README.md`
+- `C:\Users\KAPAKA\Desktop\KAPAKA\documents\ERP SYSTEM\ERP SYSTEM.md`
+- `C:\Users\KAPAKA\Desktop\KAPAKA\documents\operations\PRODUCTION_CHECKLIST.md`
 
-## Features
+Those sources drove terminology for workspace, integrations, governance, PMO, finance, support, and security. Additional document paths referenced in the audit prompt were not found in the discovered local documents directory and are called out in [docs/REFRACTOR_NOTES.md](/c:/Users/KAPAKA/Desktop/Cloun/shadcn-admin/docs/REFRACTOR_NOTES.md).
 
-- Light/dark mode
-- Responsive
-- Accessible
-- With built-in Sidebar component
-- Global search command
-- 10+ pages
-- Extra custom components
-- RTL support
+## What changed
 
-<details>
-<summary>Customized Components (click to expand)</summary>
+- Removed Clerk demo integration, duplicate auth variant, upstream starter branding, and template-only routes.
+- Replaced random/faker data with curated seed records that better match KAPAKA operational language.
+- Renamed user-facing routes to `/operations`, `/team`, `/integrations`, `/inbox`, and `/guide`.
+- Reworked dashboard, settings, auth, and empty-state copy to fit a consistent KAPAKA PLATFORM shell.
 
-This project uses Shadcn UI components, but some have been slightly modified for better RTL (Right-to-Left) support and other improvements. These customized components differ from the original Shadcn UI versions.
-
-If you want to update components using the Shadcn CLI (e.g., `npx shadcn@latest add <component>`), it's generally safe for non-customized components. For the listed customized ones, you may need to manually merge changes to preserve the project's modifications and avoid overwriting RTL support or other updates.
-
-> If you don't require RTL support, you can safely update the 'RTL Updated Components' via the Shadcn CLI, as these changes are primarily for RTL compatibility. The 'Modified Components' may have other customizations to consider.
-
-### Modified Components
-
-- scroll-area
-- sonner
-- separator
-
-### RTL Updated Components
-
-- alert-dialog
-- calendar
-- command
-- dialog
-- dropdown-menu
-- select
-- table
-- sheet
-- sidebar
-- switch
-
-**Notes:**
-
-- **Modified Components**: These have general updates, potentially including RTL adjustments.
-- **RTL Updated Components**: These have specific changes for RTL language support (e.g., layout, positioning).
-- For implementation details, check the source files in `src/components/ui/`.
-- All other Shadcn UI components in the project are standard and can be safely updated via the CLI.
-
-</details>
-
-## Tech Stack
-
-**UI:** [ShadcnUI](https://ui.shadcn.com) (TailwindCSS + RadixUI)
-
-**Build Tool:** [Vite](https://vitejs.dev/)
-
-**Routing:** [TanStack Router](https://tanstack.com/router/latest)
-
-**Type Checking:** [TypeScript](https://www.typescriptlang.org/)
-
-**Linting/Formatting:** [ESLint](https://eslint.org/) & [Prettier](https://prettier.io/)
-
-**Icons:** [Lucide Icons](https://lucide.dev/icons/), [Tabler Icons](https://tabler.io/icons) (Brand icons only)
-
-**Auth (partial):** [Clerk](https://go.clerk.com/GttUAaK)
-
-## Run Locally
-
-Clone the project
+## Local development
 
 ```bash
-  git clone https://github.com/satnaing/shadcn-admin.git
+pnpm install
+pnpm dev
 ```
 
-Go to the project directory
+Useful checks:
 
 ```bash
-  cd shadcn-admin
+pnpm lint
+pnpm build
+pnpm knip
 ```
 
-Install dependencies
+## Notes
 
-```bash
-  pnpm install
-```
-
-Start the server
-
-```bash
-  pnpm run dev
-```
-
-## Sponsoring this project ❤️
-
-If you find this project helpful or use this in your own work, consider [sponsoring me](https://github.com/sponsors/satnaing) to support development and maintenance. You can [buy me a coffee](https://buymeacoffee.com/satnaing) as well. Don’t worry, every penny helps. Thank you! 🙏
-
-For questions or sponsorship inquiries, feel free to reach out at [satnaingdev@gmail.com](mailto:satnaingdev@gmail.com).
-
-### Current Sponsor
-
-- [Clerk](https://go.clerk.com/GttUAaK) - authentication and user management for the modern web
-
-## Author
-
-Crafted with 🤍 by [@satnaing](https://github.com/satnaing)
-
-## License
-
-Licensed under the [MIT License](https://choosealicense.com/licenses/mit/)
+- The current implementation still uses seeded frontend data and mock form submissions.
+- Real API, Laravel, and identity integrations should replace the placeholders before production rollout.
+- The inherited `LICENSE` and deployment artifacts should be reviewed by a human before public release.

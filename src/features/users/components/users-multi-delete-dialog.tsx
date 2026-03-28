@@ -36,12 +36,12 @@ export function UsersMultiDeleteDialog<TData>({
     onOpenChange(false)
 
     toast.promise(sleep(2000), {
-      loading: 'Deleting users...',
+      loading: 'Removing team members...',
       success: () => {
         setValue('')
         table.resetRowSelection()
-        return `Deleted ${selectedRows.length} ${
-          selectedRows.length > 1 ? 'users' : 'user'
+        return `Removed ${selectedRows.length} ${
+          selectedRows.length > 1 ? 'members' : 'member'
         }`
       },
       error: 'Error',
@@ -60,14 +60,14 @@ export function UsersMultiDeleteDialog<TData>({
             className='me-1 inline-block stroke-destructive'
             size={18}
           />{' '}
-          Delete {selectedRows.length}{' '}
-          {selectedRows.length > 1 ? 'users' : 'user'}
+          Remove {selectedRows.length}{' '}
+          {selectedRows.length > 1 ? 'members' : 'member'}
         </span>
       }
       desc={
         <div className='space-y-4'>
           <p className='mb-2'>
-            Are you sure you want to delete the selected users? <br />
+            Are you sure you want to remove the selected members? <br />
             This action cannot be undone.
           </p>
 
@@ -83,12 +83,12 @@ export function UsersMultiDeleteDialog<TData>({
           <Alert variant='destructive'>
             <AlertTitle>Warning!</AlertTitle>
             <AlertDescription>
-              Please be careful, this operation can not be rolled back.
+              This bulk removal cannot be rolled back automatically.
             </AlertDescription>
           </Alert>
         </div>
       }
-      confirmText='Delete'
+      confirmText='Remove'
       destructive
     />
   )

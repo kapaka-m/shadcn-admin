@@ -1,6 +1,6 @@
 import { type ChangeEvent, useState } from 'react'
 import { getRouteApi } from '@tanstack/react-router'
-import { SlidersHorizontal, ArrowUpAZ, ArrowDownAZ } from 'lucide-react'
+import { ArrowDownAZ, ArrowUpAZ, SlidersHorizontal } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
@@ -19,14 +19,14 @@ import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
 import { apps } from './data/apps'
 
-const route = getRouteApi('/_authenticated/apps/')
+const route = getRouteApi('/_authenticated/integrations/')
 
 type AppType = 'all' | 'connected' | 'notConnected'
 
 const appText = new Map<AppType, string>([
-  ['all', 'All Apps'],
+  ['all', 'All connectors'],
   ['connected', 'Connected'],
-  ['notConnected', 'Not Connected'],
+  ['notConnected', 'Pending'],
 ])
 
 export function Apps() {
@@ -41,7 +41,7 @@ export function Apps() {
   const [appType, setAppType] = useState(type)
   const [searchTerm, setSearchTerm] = useState(filter)
 
-  const filteredApps = apps
+  const filteredApps = [...apps]
     .sort((a, b) =>
       sort === 'asc'
         ? a.name.localeCompare(b.name)
@@ -76,16 +76,15 @@ export function Apps() {
     })
   }
 
-  const handleSortChange = (sort: 'asc' | 'desc') => {
-    setSort(sort)
-    navigate({ search: (prev) => ({ ...prev, sort }) })
+  const handleSortChange = (value: 'asc' | 'desc') => {
+    setSort(value)
+    navigate({ search: (prev) => ({ ...prev, sort: value }) })
   }
 
   return (
     <>
-      {/* ===== Top Heading ===== */}
       <Header>
-        <Search />
+        <Search placeholder='Search connectors' />
         <div className='ms-auto flex items-center gap-4'>
           <ThemeSwitch />
           <ConfigDrawer />
@@ -93,32 +92,32 @@ export function Apps() {
         </div>
       </Header>
 
-      {/* ===== Content ===== */}
       <Main fixed>
         <div>
           <h1 className='text-2xl font-bold tracking-tight'>
-            App Integrations
+            Integrations and Connectors
           </h1>
-          <p className='text-muted-foreground'>
-            Here&apos;s a list of your apps for the integration!
+          <p className='max-w-3xl text-muted-foreground'>
+            Canonical connector surfaces aligned to the KAPAKA documentation:
+            delivery tools, communications, billing, and operational handoff.
           </p>
         </div>
-        <div className='my-4 flex items-end justify-between sm:my-0 sm:items-center'>
+        <div className='my-4 flex items-end justify-between gap-3 sm:my-0 sm:items-center'>
           <div className='flex flex-col gap-4 sm:my-4 sm:flex-row'>
             <Input
-              placeholder='Filter apps...'
+              placeholder='Filter connectors...'
               className='h-9 w-40 lg:w-[250px]'
               value={searchTerm}
               onChange={handleSearch}
             />
             <Select value={appType} onValueChange={handleTypeChange}>
-              <SelectTrigger className='w-36'>
+              <SelectTrigger className='w-40'>
                 <SelectValue>{appText.get(appType)}</SelectValue>
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value='all'>All Apps</SelectItem>
+                <SelectItem value='all'>All connectors</SelectItem>
                 <SelectItem value='connected'>Connected</SelectItem>
-                <SelectItem value='notConnected'>Not Connected</SelectItem>
+                <SelectItem value='notConnected'>Pending</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -150,25 +149,29 @@ export function Apps() {
           {filteredApps.map((app) => (
             <li
               key={app.name}
-              className='rounded-lg border p-4 hover:shadow-md'
+              className='rounded-lg border p-4 transition-shadow hover:shadow-md'
             >
               <div className='mb-8 flex items-center justify-between'>
-                <div
-                  className={`flex size-10 items-center justify-center rounded-lg bg-muted p-2`}
-                >
+                <div className='flex size-10 items-center justify-center rounded-lg bg-muted p-2'>
                   {app.logo}
                 </div>
                 <Button
                   variant='outline'
                   size='sm'
-                  className={`${app.connected ? 'border border-blue-300 bg-blue-50 hover:bg-blue-100 dark:border-blue-700 dark:bg-blue-950 dark:hover:bg-blue-900' : ''}`}
+                  className={
+                    app.connected
+                      ? 'border-emerald-300 bg-emerald-50 text-emerald-900 hover:bg-emerald-100 dark:border-emerald-900 dark:bg-emerald-950 dark:text-emerald-200 dark:hover:bg-emerald-900/70'
+                      : ''
+                  }
                 >
-                  {app.connected ? 'Connected' : 'Connect'}
+                  {app.connected ? 'Connected' : 'Pending'}
                 </Button>
               </div>
-              <div>
-                <h2 className='mb-1 font-semibold'>{app.name}</h2>
-                <p className='line-clamp-2 text-gray-500'>{app.desc}</p>
+              <div className='space-y-1'>
+                <h2 className='font-semibold'>{app.name}</h2>
+                <p className='line-clamp-3 text-sm text-muted-foreground'>
+                  {app.desc}
+                </p>
               </div>
             </li>
           ))}

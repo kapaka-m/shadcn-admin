@@ -28,7 +28,7 @@ export function SignOutDialog({ open, onOpenChange }: SignOutDialogProps) {
       open={open}
       onOpenChange={onOpenChange}
       title='Sign out'
-      desc='Are you sure you want to sign out? You will need to sign in again to access your account.'
+      desc='Sign out of the current KAPAKA PLATFORM session. You will need to authenticate again before returning to the workspace.'
       confirmText='Sign out'
       destructive
       handleConfirm={handleSignOut}

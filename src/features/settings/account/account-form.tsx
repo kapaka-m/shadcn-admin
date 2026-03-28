@@ -43,20 +43,21 @@ const languages = [
 ] as const
 
 const accountFormSchema = z.object({
-  name: z
+  displayName: z
     .string()
-    .min(1, 'Please enter your name.')
-    .min(2, 'Name must be at least 2 characters.')
-    .max(30, 'Name must not be longer than 30 characters.'),
-  dob: z.date('Please select your date of birth.'),
+    .min(1, 'Please enter a display name.')
+    .min(2, 'Display name must be at least 2 characters.')
+    .max(30, 'Display name must not be longer than 30 characters.'),
+  reviewDate: z.date('Please select the next access review date.'),
   language: z.string('Please select a language.'),
 })
 
 type AccountFormValues = z.infer<typeof accountFormSchema>
 
-// This can come from your database or API.
 const defaultValues: Partial<AccountFormValues> = {
-  name: '',
+  displayName: 'Platform Operator',
+  reviewDate: new Date('2026-04-01T00:00:00Z'),
+  language: 'en',
 }
 
 export function AccountForm() {
@@ -74,16 +75,15 @@ export function AccountForm() {
       <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
         <FormField
           control={form.control}
-          name='name'
+          name='displayName'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>Display name</FormLabel>
               <FormControl>
-                <Input placeholder='Your name' {...field} />
+                <Input placeholder='Platform Operator' {...field} />
               </FormControl>
               <FormDescription>
-                This is the name that will be displayed on your profile and in
-                emails.
+                This name appears in workspace headers, menus, and review notes.
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -91,13 +91,13 @@ export function AccountForm() {
         />
         <FormField
           control={form.control}
-          name='dob'
+          name='reviewDate'
           render={({ field }) => (
             <FormItem className='flex flex-col'>
-              <FormLabel>Date of birth</FormLabel>
+              <FormLabel>Next access review</FormLabel>
               <DatePicker selected={field.value} onSelect={field.onChange} />
               <FormDescription>
-                Your date of birth is used to calculate your age.
+                Track the next manual review date for this operator profile.
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -108,7 +108,7 @@ export function AccountForm() {
           name='language'
           render={({ field }) => (
             <FormItem className='flex flex-col'>
-              <FormLabel>Language</FormLabel>
+              <FormLabel>Workspace language</FormLabel>
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
@@ -116,7 +116,7 @@ export function AccountForm() {
                       variant='outline'
                       role='combobox'
                       className={cn(
-                        'w-[200px] justify-between',
+                        'w-[220px] justify-between',
                         !field.value && 'text-muted-foreground'
                       )}
                     >
@@ -129,7 +129,7 @@ export function AccountForm() {
                     </Button>
                   </FormControl>
                 </PopoverTrigger>
-                <PopoverContent className='w-[200px] p-0'>
+                <PopoverContent className='w-[220px] p-0'>
                   <Command>
                     <CommandInput placeholder='Search language...' />
                     <CommandEmpty>No language found.</CommandEmpty>
@@ -160,13 +160,13 @@ export function AccountForm() {
                 </PopoverContent>
               </Popover>
               <FormDescription>
-                This is the language that will be used in the dashboard.
+                This controls language preferences across the workspace shell.
               </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type='submit'>Update account</Button>
+        <Button type='submit'>Save access settings</Button>
       </form>
     </Form>
   )

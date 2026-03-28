@@ -36,7 +36,7 @@ export function DataTableBulkActions<TData>({
       loading: 'Updating status...',
       success: () => {
         table.resetRowSelection()
-        return `Status updated to "${status}" for ${selectedTasks.length} task${selectedTasks.length > 1 ? 's' : ''}.`
+        return `Status updated to "${status}" for ${selectedTasks.length} work item${selectedTasks.length > 1 ? 's' : ''}.`
       },
       error: 'Error',
     })
@@ -49,7 +49,7 @@ export function DataTableBulkActions<TData>({
       loading: 'Updating priority...',
       success: () => {
         table.resetRowSelection()
-        return `Priority updated to "${priority}" for ${selectedTasks.length} task${selectedTasks.length > 1 ? 's' : ''}.`
+        return `Priority updated to "${priority}" for ${selectedTasks.length} work item${selectedTasks.length > 1 ? 's' : ''}.`
       },
       error: 'Error',
     })
@@ -59,10 +59,10 @@ export function DataTableBulkActions<TData>({
   const handleBulkExport = () => {
     const selectedTasks = selectedRows.map((row) => row.original as Task)
     toast.promise(sleep(2000), {
-      loading: 'Exporting tasks...',
+      loading: 'Exporting work items...',
       success: () => {
         table.resetRowSelection()
-        return `Exported ${selectedTasks.length} task${selectedTasks.length > 1 ? 's' : ''} to CSV.`
+        return `Exported ${selectedTasks.length} work item${selectedTasks.length > 1 ? 's' : ''} to CSV.`
       },
       error: 'Error',
     })
@@ -71,7 +71,7 @@ export function DataTableBulkActions<TData>({
 
   return (
     <>
-      <BulkActionsToolbar table={table} entityName='task'>
+      <BulkActionsToolbar table={table} entityName='work item'>
         <DropdownMenu>
           <Tooltip>
             <TooltipTrigger asChild>
@@ -151,15 +151,15 @@ export function DataTableBulkActions<TData>({
               size='icon'
               onClick={() => handleBulkExport()}
               className='size-8'
-              aria-label='Export tasks'
-              title='Export tasks'
+              aria-label='Export work items'
+              title='Export work items'
             >
               <Download />
-              <span className='sr-only'>Export tasks</span>
+              <span className='sr-only'>Export work items</span>
             </Button>
           </TooltipTrigger>
           <TooltipContent>
-            <p>Export tasks</p>
+            <p>Export work items</p>
           </TooltipContent>
         </Tooltip>
 
@@ -170,15 +170,15 @@ export function DataTableBulkActions<TData>({
               size='icon'
               onClick={() => setShowDeleteConfirm(true)}
               className='size-8'
-              aria-label='Delete selected tasks'
-              title='Delete selected tasks'
+              aria-label='Remove selected work items'
+              title='Remove selected work items'
             >
               <Trash2 />
-              <span className='sr-only'>Delete selected tasks</span>
+              <span className='sr-only'>Remove selected work items</span>
             </Button>
           </TooltipTrigger>
           <TooltipContent>
-            <p>Delete selected tasks</p>
+            <p>Remove selected work items</p>
           </TooltipContent>
         </Tooltip>
       </BulkActionsToolbar>

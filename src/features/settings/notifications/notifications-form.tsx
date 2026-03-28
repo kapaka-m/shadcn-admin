@@ -25,20 +25,20 @@ const notificationsFormSchema = z.object({
         : undefined,
   }),
   mobile: z.boolean().default(false).optional(),
-  communication_emails: z.boolean().default(false).optional(),
-  social_emails: z.boolean().default(false).optional(),
-  marketing_emails: z.boolean().default(false).optional(),
+  operations_emails: z.boolean().default(false).optional(),
+  finance_emails: z.boolean().default(false).optional(),
+  integration_emails: z.boolean().default(false).optional(),
   security_emails: z.boolean(),
 })
 
 type NotificationsFormValues = z.infer<typeof notificationsFormSchema>
 
-// This can come from your database or API.
 const defaultValues: Partial<NotificationsFormValues> = {
-  communication_emails: false,
-  marketing_emails: false,
-  social_emails: true,
+  operations_emails: true,
+  finance_emails: false,
+  integration_emails: true,
   security_emails: true,
+  type: 'mentions',
 }
 
 export function NotificationsForm() {
@@ -70,7 +70,7 @@ export function NotificationsForm() {
                       <RadioGroupItem value='all' />
                     </FormControl>
                     <FormLabel className='font-normal'>
-                      All new messages
+                      All alerts, approvals, and blockers
                     </FormLabel>
                   </FormItem>
                   <FormItem className='flex items-center'>
@@ -78,7 +78,7 @@ export function NotificationsForm() {
                       <RadioGroupItem value='mentions' />
                     </FormControl>
                     <FormLabel className='font-normal'>
-                      Direct messages and mentions
+                      Direct mentions and blocking items
                     </FormLabel>
                   </FormItem>
                   <FormItem className='flex items-center'>
@@ -94,19 +94,20 @@ export function NotificationsForm() {
           )}
         />
         <div className='relative'>
-          <h3 className='mb-4 text-lg font-medium'>Email Notifications</h3>
+          <h3 className='mb-4 text-lg font-medium'>Email notifications</h3>
           <div className='space-y-4'>
             <FormField
               control={form.control}
-              name='communication_emails'
+              name='operations_emails'
               render={({ field }) => (
                 <FormItem className='flex flex-row items-center justify-between rounded-lg border p-4'>
                   <div className='space-y-0.5'>
                     <FormLabel className='text-base'>
-                      Communication emails
+                      Operations digests
                     </FormLabel>
                     <FormDescription>
-                      Receive emails about your account activity.
+                      Receive queue summaries, approval updates, and blocked item
+                      reminders.
                     </FormDescription>
                   </div>
                   <FormControl>
@@ -120,15 +121,16 @@ export function NotificationsForm() {
             />
             <FormField
               control={form.control}
-              name='marketing_emails'
+              name='finance_emails'
               render={({ field }) => (
                 <FormItem className='flex flex-row items-center justify-between rounded-lg border p-4'>
                   <div className='space-y-0.5'>
                     <FormLabel className='text-base'>
-                      Marketing emails
+                      Finance and commercialization
                     </FormLabel>
                     <FormDescription>
-                      Receive emails about new products, features, and more.
+                      Receive billing, collections, and month-end readiness
+                      updates.
                     </FormDescription>
                   </div>
                   <FormControl>
@@ -142,13 +144,16 @@ export function NotificationsForm() {
             />
             <FormField
               control={form.control}
-              name='social_emails'
+              name='integration_emails'
               render={({ field }) => (
                 <FormItem className='flex flex-row items-center justify-between rounded-lg border p-4'>
                   <div className='space-y-0.5'>
-                    <FormLabel className='text-base'>Social emails</FormLabel>
+                    <FormLabel className='text-base'>
+                      Connector status
+                    </FormLabel>
                     <FormDescription>
-                      Receive emails for friend requests, follows, and more.
+                      Receive connector incidents, replay reminders, and cutover
+                      posture changes.
                     </FormDescription>
                   </div>
                   <FormControl>
@@ -166,9 +171,12 @@ export function NotificationsForm() {
               render={({ field }) => (
                 <FormItem className='flex flex-row items-center justify-between rounded-lg border p-4'>
                   <div className='space-y-0.5'>
-                    <FormLabel className='text-base'>Security emails</FormLabel>
+                    <FormLabel className='text-base'>
+                      Security bulletins
+                    </FormLabel>
                     <FormDescription>
-                      Receive emails about your account activity and security.
+                      Receive privileged session, access review, and incident
+                      posture updates.
                     </FormDescription>
                   </div>
                   <FormControl>
@@ -196,16 +204,14 @@ export function NotificationsForm() {
                 />
               </FormControl>
               <div className='space-y-1 leading-none'>
-                <FormLabel>
-                  Use different settings for my mobile devices
-                </FormLabel>
+                <FormLabel>Use separate rules for on-call devices</FormLabel>
                 <FormDescription>
-                  You can manage your mobile notifications in the{' '}
+                  You can review related options in the{' '}
                   <Link
-                    to='/settings'
+                    to='/settings/display'
                     className='underline decoration-dashed underline-offset-4 hover:decoration-solid'
                   >
-                    mobile settings
+                    navigation settings
                   </Link>{' '}
                   page.
                 </FormDescription>
@@ -213,7 +219,7 @@ export function NotificationsForm() {
             </FormItem>
           )}
         />
-        <Button type='submit'>Update notifications</Button>
+        <Button type='submit'>Save notification rules</Button>
       </form>
     </Form>
   )

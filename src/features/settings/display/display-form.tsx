@@ -16,28 +16,28 @@ import {
 
 const items = [
   {
-    id: 'recents',
-    label: 'Recents',
+    id: 'workspace',
+    label: 'Workspace',
   },
   {
-    id: 'home',
-    label: 'Home',
+    id: 'operations',
+    label: 'Operations',
   },
   {
-    id: 'applications',
-    label: 'Applications',
+    id: 'team',
+    label: 'Team',
   },
   {
-    id: 'desktop',
-    label: 'Desktop',
+    id: 'integrations',
+    label: 'Integrations',
   },
   {
-    id: 'downloads',
-    label: 'Downloads',
+    id: 'inbox',
+    label: 'Inbox',
   },
   {
-    id: 'documents',
-    label: 'Documents',
+    id: 'guide',
+    label: 'Guide',
   },
 ] as const
 
@@ -49,9 +49,8 @@ const displayFormSchema = z.object({
 
 type DisplayFormValues = z.infer<typeof displayFormSchema>
 
-// This can come from your database or API.
 const defaultValues: Partial<DisplayFormValues> = {
-  items: ['recents', 'home'],
+  items: ['workspace', 'operations', 'team', 'integrations', 'inbox'],
 }
 
 export function DisplayForm() {
@@ -72,9 +71,9 @@ export function DisplayForm() {
           render={() => (
             <FormItem>
               <div className='mb-4'>
-                <FormLabel className='text-base'>Sidebar</FormLabel>
+                <FormLabel className='text-base'>Sidebar visibility</FormLabel>
                 <FormDescription>
-                  Select the items you want to display in the sidebar.
+                  Select the sections you want to keep pinned in the sidebar.
                 </FormDescription>
               </div>
               {items.map((item) => (
@@ -114,7 +113,7 @@ export function DisplayForm() {
             </FormItem>
           )}
         />
-        <Button type='submit'>Update display</Button>
+        <Button type='submit'>Save navigation</Button>
       </form>
     </Form>
   )

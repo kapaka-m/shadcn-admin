@@ -101,7 +101,7 @@ export function UsersTable({ data, search, navigate }: DataTableProps) {
     >
       <DataTableToolbar
         table={table}
-        searchPlaceholder='Filter users...'
+        searchPlaceholder='Filter team members...'
         searchKey='username'
         filters={[
           {
@@ -116,7 +116,7 @@ export function UsersTable({ data, search, navigate }: DataTableProps) {
           },
           {
             columnId: 'role',
-            title: 'Role',
+            title: 'Responsibility',
             options: roles.map((role) => ({ ...role })),
           },
         ]}
@@ -180,7 +180,7 @@ export function UsersTable({ data, search, navigate }: DataTableProps) {
                   colSpan={columns.length}
                   className='h-24 text-center'
                 >
-                  No results.
+                  No team members found.
                 </TableCell>
               </TableRow>
             )}

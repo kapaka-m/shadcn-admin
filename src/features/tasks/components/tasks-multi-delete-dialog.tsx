@@ -36,12 +36,12 @@ export function TasksMultiDeleteDialog<TData>({
     onOpenChange(false)
 
     toast.promise(sleep(2000), {
-      loading: 'Deleting tasks...',
+      loading: 'Removing work items...',
       success: () => {
         setValue('')
         table.resetRowSelection()
-        return `Deleted ${selectedRows.length} ${
-          selectedRows.length > 1 ? 'tasks' : 'task'
+        return `Removed ${selectedRows.length} ${
+          selectedRows.length > 1 ? 'items' : 'item'
         }`
       },
       error: 'Error',
@@ -60,14 +60,14 @@ export function TasksMultiDeleteDialog<TData>({
             className='me-1 inline-block stroke-destructive'
             size={18}
           />{' '}
-          Delete {selectedRows.length}{' '}
-          {selectedRows.length > 1 ? 'tasks' : 'task'}
+          Remove {selectedRows.length}{' '}
+          {selectedRows.length > 1 ? 'items' : 'item'}
         </span>
       }
       desc={
         <div className='space-y-4'>
           <p className='mb-2'>
-            Are you sure you want to delete the selected tasks? <br />
+            Are you sure you want to remove the selected work items? <br />
             This action cannot be undone.
           </p>
 
@@ -83,12 +83,12 @@ export function TasksMultiDeleteDialog<TData>({
           <Alert variant='destructive'>
             <AlertTitle>Warning!</AlertTitle>
             <AlertDescription>
-              Please be careful, this operation can not be rolled back.
+              This bulk removal cannot be rolled back automatically.
             </AlertDescription>
           </Alert>
         </div>
       }
-      confirmText='Delete'
+      confirmText='Remove'
       destructive
     />
   )

@@ -1,33 +1,100 @@
-import { faker } from '@faker-js/faker'
+import { type User } from './schema'
 
-// Set a fixed seed for consistent data generation
-faker.seed(67890)
-
-export const users = Array.from({ length: 500 }, () => {
-  const firstName = faker.person.firstName()
-  const lastName = faker.person.lastName()
-  return {
-    id: faker.string.uuid(),
-    firstName,
-    lastName,
-    username: faker.internet
-      .username({ firstName, lastName })
-      .toLocaleLowerCase(),
-    email: faker.internet.email({ firstName }).toLocaleLowerCase(),
-    phoneNumber: faker.phone.number({ style: 'international' }),
-    status: faker.helpers.arrayElement([
-      'active',
-      'inactive',
-      'invited',
-      'suspended',
-    ]),
-    role: faker.helpers.arrayElement([
-      'superadmin',
-      'admin',
-      'cashier',
-      'manager',
-    ]),
-    createdAt: faker.date.past(),
-    updatedAt: faker.date.recent(),
-  }
-})
+export const users: User[] = [
+  {
+    id: 'USR-001',
+    firstName: 'Aziza',
+    lastName: 'Karimova',
+    username: 'aziza.karimova',
+    email: 'aziza.karimova@kapaka.local',
+    phoneNumber: '+998 90 100 0101',
+    status: 'active',
+    role: 'platform_admin',
+    createdAt: new Date('2026-01-03T09:00:00Z'),
+    updatedAt: new Date('2026-03-27T09:15:00Z'),
+  },
+  {
+    id: 'USR-002',
+    firstName: 'Kamol',
+    lastName: 'Ergashev',
+    username: 'kamol.ergashev',
+    email: 'kamol.ergashev@kapaka.local',
+    phoneNumber: '+998 90 100 0102',
+    status: 'active',
+    role: 'delivery_lead',
+    createdAt: new Date('2026-01-05T09:00:00Z'),
+    updatedAt: new Date('2026-03-27T11:20:00Z'),
+  },
+  {
+    id: 'USR-003',
+    firstName: 'Dilnoza',
+    lastName: 'Saidova',
+    username: 'dilnoza.saidova',
+    email: 'dilnoza.saidova@kapaka.local',
+    phoneNumber: '+998 90 100 0103',
+    status: 'active',
+    role: 'finance_ops',
+    createdAt: new Date('2026-01-08T09:00:00Z'),
+    updatedAt: new Date('2026-03-26T16:40:00Z'),
+  },
+  {
+    id: 'USR-004',
+    firstName: 'Javlon',
+    lastName: 'Rasulov',
+    username: 'javlon.rasulov',
+    email: 'javlon.rasulov@kapaka.local',
+    phoneNumber: '+998 90 100 0104',
+    status: 'active',
+    role: 'support_lead',
+    createdAt: new Date('2026-01-12T09:00:00Z'),
+    updatedAt: new Date('2026-03-28T06:10:00Z'),
+  },
+  {
+    id: 'USR-005',
+    firstName: 'Malika',
+    lastName: 'Turaeva',
+    username: 'malika.turaeva',
+    email: 'malika.turaeva@kapaka.local',
+    phoneNumber: '+998 90 100 0105',
+    status: 'invited',
+    role: 'delivery_lead',
+    createdAt: new Date('2026-02-03T09:00:00Z'),
+    updatedAt: new Date('2026-03-25T14:30:00Z'),
+  },
+  {
+    id: 'USR-006',
+    firstName: 'Rustam',
+    lastName: 'Akhmedov',
+    username: 'rustam.akhmedov',
+    email: 'rustam.akhmedov@kapaka.local',
+    phoneNumber: '+998 90 100 0106',
+    status: 'inactive',
+    role: 'finance_ops',
+    createdAt: new Date('2026-01-17T09:00:00Z'),
+    updatedAt: new Date('2026-03-20T12:05:00Z'),
+  },
+  {
+    id: 'USR-007',
+    firstName: 'Nigora',
+    lastName: 'Mamatova',
+    username: 'nigora.mamatova',
+    email: 'nigora.mamatova@kapaka.local',
+    phoneNumber: '+998 90 100 0107',
+    status: 'active',
+    role: 'support_lead',
+    createdAt: new Date('2026-01-21T09:00:00Z'),
+    updatedAt: new Date('2026-03-27T13:55:00Z'),
+  },
+  {
+    id: 'USR-008',
+    firstName: 'Sardor',
+    lastName: 'Nazarov',
+    username: 'sardor.nazarov',
+    email: 'sardor.nazarov@kapaka.local',
+    phoneNumber: '+998 90 100 0108',
+    status: 'suspended',
+    role: 'platform_admin',
+    createdAt: new Date('2026-01-23T09:00:00Z'),
+    updatedAt: new Date('2026-03-18T08:45:00Z'),
+  },
+]

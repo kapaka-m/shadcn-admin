@@ -1,29 +1,136 @@
-import { faker } from '@faker-js/faker'
+import { type Task } from './schema'
 
-// Set a fixed seed for consistent data generation
-faker.seed(12345)
-
-export const tasks = Array.from({ length: 100 }, () => {
-  const statuses = [
-    'todo',
-    'in progress',
-    'done',
-    'canceled',
-    'backlog',
-  ] as const
-  const labels = ['bug', 'feature', 'documentation'] as const
-  const priorities = ['low', 'medium', 'high'] as const
-
-  return {
-    id: `TASK-${faker.number.int({ min: 1000, max: 9999 })}`,
-    title: faker.lorem.sentence({ min: 5, max: 15 }),
-    status: faker.helpers.arrayElement(statuses),
-    label: faker.helpers.arrayElement(labels),
-    priority: faker.helpers.arrayElement(priorities),
-    createdAt: faker.date.past(),
-    updatedAt: faker.date.recent(),
-    assignee: faker.person.fullName(),
-    description: faker.lorem.paragraph({ min: 1, max: 3 }),
-    dueDate: faker.date.future(),
-  }
-})
+export const tasks: Task[] = [
+  {
+    id: 'OPS-1001',
+    title: 'Review PMO milestone approvals for the current delivery wave.',
+    status: 'in progress',
+    label: 'delivery',
+    priority: 'high',
+    createdAt: new Date('2026-03-17T08:00:00Z'),
+    updatedAt: new Date('2026-03-27T10:40:00Z'),
+    assignee: 'Kamol Ergashev',
+    description:
+      'Validate delayed milestones, confirm owners, and unblock release-ready items.',
+    dueDate: new Date('2026-03-30T18:00:00Z'),
+  },
+  {
+    id: 'OPS-1002',
+    title:
+      'Complete restore validation evidence for the current production checklist.',
+    status: 'todo',
+    label: 'governance',
+    priority: 'critical',
+    createdAt: new Date('2026-03-18T08:00:00Z'),
+    updatedAt: new Date('2026-03-27T09:05:00Z'),
+    assignee: 'Dilnoza Saidova',
+    description:
+      'Attach restore results, capture runbook notes, and close the operator residue item.',
+    dueDate: new Date('2026-03-29T17:00:00Z'),
+  },
+  {
+    id: 'OPS-1003',
+    title: 'Prepare Stripe connector cutover checklist for tenant billing.',
+    status: 'backlog',
+    label: 'integration',
+    priority: 'medium',
+    createdAt: new Date('2026-03-18T08:00:00Z'),
+    updatedAt: new Date('2026-03-25T16:20:00Z'),
+    assignee: 'Javlon Rasulov',
+    description:
+      'Confirm webhook posture, payment event mapping, and fallback monitoring.',
+    dueDate: new Date('2026-04-02T12:00:00Z'),
+  },
+  {
+    id: 'OPS-1004',
+    title: 'Reconcile support escalation backlog with current SLA posture.',
+    status: 'in progress',
+    label: 'delivery',
+    priority: 'high',
+    createdAt: new Date('2026-03-19T08:00:00Z'),
+    updatedAt: new Date('2026-03-28T07:45:00Z'),
+    assignee: 'Nigora Mamatova',
+    description:
+      'Confirm aging tickets, breach actions, and client communication owners.',
+    dueDate: new Date('2026-03-31T15:00:00Z'),
+  },
+  {
+    id: 'OPS-1005',
+    title: 'Update governance notes for privileged session review findings.',
+    status: 'todo',
+    label: 'governance',
+    priority: 'high',
+    createdAt: new Date('2026-03-20T08:00:00Z'),
+    updatedAt: new Date('2026-03-27T14:10:00Z'),
+    assignee: 'Aziza Karimova',
+    description:
+      'Document maker-checker outcomes and link unresolved items to security follow-up.',
+    dueDate: new Date('2026-03-29T14:00:00Z'),
+  },
+  {
+    id: 'OPS-1006',
+    title: 'Validate GitHub release mapping against PMO reference sync rules.',
+    status: 'done',
+    label: 'integration',
+    priority: 'medium',
+    createdAt: new Date('2026-03-21T08:00:00Z'),
+    updatedAt: new Date('2026-03-26T18:25:00Z'),
+    assignee: 'Kamol Ergashev',
+    description:
+      'Verify deployment references, milestone linkage, and environment-specific metadata.',
+    dueDate: new Date('2026-03-26T18:00:00Z'),
+  },
+  {
+    id: 'OPS-1007',
+    title: 'Draft inbox ownership rules for approval, alert, and task triage.',
+    status: 'backlog',
+    label: 'delivery',
+    priority: 'low',
+    createdAt: new Date('2026-03-21T08:00:00Z'),
+    updatedAt: new Date('2026-03-24T10:10:00Z'),
+    assignee: 'Malika Turaeva',
+    description:
+      'Define routing defaults, escalation paths, and when to surface human review warnings.',
+    dueDate: new Date('2026-04-03T16:00:00Z'),
+  },
+  {
+    id: 'OPS-1008',
+    title:
+      'Close documentation gaps between discovered docs and expected audit inputs.',
+    status: 'in progress',
+    label: 'governance',
+    priority: 'medium',
+    createdAt: new Date('2026-03-22T08:00:00Z'),
+    updatedAt: new Date('2026-03-28T05:55:00Z'),
+    assignee: 'Aziza Karimova',
+    description:
+      'Record missing document roots so follow-up architecture work has explicit boundaries.',
+    dueDate: new Date('2026-03-30T11:00:00Z'),
+  },
+  {
+    id: 'OPS-1009',
+    title: 'Review Docker deployment drill scripts before the next dry run.',
+    status: 'todo',
+    label: 'integration',
+    priority: 'medium',
+    createdAt: new Date('2026-03-23T08:00:00Z'),
+    updatedAt: new Date('2026-03-27T12:30:00Z'),
+    assignee: 'Sardor Nazarov',
+    description:
+      'Confirm script assumptions, environment references, and recovery checkpoints.',
+    dueDate: new Date('2026-03-31T13:00:00Z'),
+  },
+  {
+    id: 'OPS-1010',
+    title: 'Retire duplicate starter routes and confirm there are no live references.',
+    status: 'done',
+    label: 'delivery',
+    priority: 'high',
+    createdAt: new Date('2026-03-24T08:00:00Z'),
+    updatedAt: new Date('2026-03-28T04:10:00Z'),
+    assignee: 'Platform Operator',
+    description:
+      'Remove template-only auth and optional demo routes, then validate route coherence.',
+    dueDate: new Date('2026-03-28T08:00:00Z'),
+  },
+]

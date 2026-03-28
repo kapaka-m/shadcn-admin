@@ -68,11 +68,11 @@ export function UsersInviteDialog({
       <DialogContent className='sm:max-w-md'>
         <DialogHeader className='text-start'>
           <DialogTitle className='flex items-center gap-2'>
-            <MailPlus /> Invite User
+            <MailPlus /> Invite team member
           </DialogTitle>
           <DialogDescription>
-            Invite new user to join your team by sending them an email
-            invitation. Assign a role to define their access level.
+            Send a workspace invitation and assign the initial operating role
+            for the new member.
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -90,7 +90,7 @@ export function UsersInviteDialog({
                   <FormControl>
                     <Input
                       type='email'
-                      placeholder='eg: john.doe@gmail.com'
+                      placeholder='member@kapaka.local'
                       {...field}
                     />
                   </FormControl>
@@ -122,11 +122,11 @@ export function UsersInviteDialog({
               name='desc'
               render={({ field }) => (
                 <FormItem className=''>
-                  <FormLabel>Description (optional)</FormLabel>
+                  <FormLabel>Invitation note (optional)</FormLabel>
                   <FormControl>
                     <Textarea
                       className='resize-none'
-                      placeholder='Add a personal note to your invitation (optional)'
+                      placeholder='Add access context, onboarding notes, or ownership details.'
                       {...field}
                     />
                   </FormControl>
@@ -141,7 +141,7 @@ export function UsersInviteDialog({
             <Button variant='outline'>Cancel</Button>
           </DialogClose>
           <Button type='submit' form='user-invite-form'>
-            Invite <Send />
+            Send invite <Send />
           </Button>
         </DialogFooter>
       </DialogContent>

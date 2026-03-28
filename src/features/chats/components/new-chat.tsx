@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Check, X } from 'lucide-react'
 import { showSubmittedData } from '@/lib/show-submitted-data'
+import { getInitials } from '@/lib/utils'
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
@@ -17,20 +19,21 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
-import { type ChatUser } from '../data/chat-types'
+import { type InboxThread } from '../data/chat-types'
 
-type User = Omit<ChatUser, 'messages'>
+type ThreadUser = Omit<InboxThread, 'messages'>
 
 type NewChatProps = {
-  users: User[]
+  users: ThreadUser[]
   open: boolean
   onOpenChange: (open: boolean) => void
 }
-export function NewChat({ users, onOpenChange, open }: NewChatProps) {
-  const [selectedUsers, setSelectedUsers] = useState<User[]>([])
 
-  const handleSelectUser = (user: User) => {
-    if (!selectedUsers.find((u) => u.id === user.id)) {
+export function NewChat({ users, onOpenChange, open }: NewChatProps) {
+  const [selectedUsers, setSelectedUsers] = useState<ThreadUser[]>([])
+
+  const handleSelectUser = (user: ThreadUser) => {
+    if (!selectedUsers.find((entry) => entry.id === user.id)) {
       setSelectedUsers([...selectedUsers, user])
     } else {
       handleRemoveUser(user.id)
@@ -43,7 +46,6 @@ export function NewChat({ users, onOpenChange, open }: NewChatProps) {
 
   const handleOpenChange = (newOpen: boolean) => {
     onOpenChange(newOpen)
-    // Reset selected users when dialog closes
     if (!newOpen) {
       setSelectedUsers([])
     }
@@ -53,11 +55,13 @@ export function NewChat({ users, onOpenChange, open }: NewChatProps) {
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent className='sm:max-w-[600px]'>
         <DialogHeader>
-          <DialogTitle>New message</DialogTitle>
+          <DialogTitle>Create review thread</DialogTitle>
         </DialogHeader>
         <div className='flex flex-col gap-4'>
           <div className='flex flex-wrap items-baseline-last gap-2'>
-            <span className='min-h-6 text-sm text-muted-foreground'>To:</span>
+            <span className='min-h-6 text-sm text-muted-foreground'>
+              Participants:
+            </span>
             {selectedUsers.map((user) => (
               <Badge key={user.id} variant='default'>
                 {user.fullName}
@@ -77,11 +81,11 @@ export function NewChat({ users, onOpenChange, open }: NewChatProps) {
           </div>
           <Command className='rounded-lg border'>
             <CommandInput
-              placeholder='Search people...'
+              placeholder='Search owners or queues...'
               className='text-foreground'
             />
             <CommandList>
-              <CommandEmpty>No people found.</CommandEmpty>
+              <CommandEmpty>No matching owner found.</CommandEmpty>
               <CommandGroup>
                 {users.map((user) => (
                   <CommandItem
@@ -90,11 +94,11 @@ export function NewChat({ users, onOpenChange, open }: NewChatProps) {
                     className='flex items-center justify-between gap-2 hover:bg-accent hover:text-accent-foreground'
                   >
                     <div className='flex items-center gap-2'>
-                      <img
-                        src={user.profile || '/placeholder.svg'}
-                        alt={user.fullName}
-                        className='h-8 w-8 rounded-full'
-                      />
+                      <Avatar className='h-8 w-8'>
+                        <AvatarFallback>
+                          {getInitials(user.fullName)}
+                        </AvatarFallback>
+                      </Avatar>
                       <div className='flex flex-col'>
                         <span className='text-sm font-medium'>
                           {user.fullName}
@@ -105,7 +109,7 @@ export function NewChat({ users, onOpenChange, open }: NewChatProps) {
                       </div>
                     </div>
 
-                    {selectedUsers.find((u) => u.id === user.id) && (
+                    {selectedUsers.find((entry) => entry.id === user.id) && (
                       <Check className='h-4 w-4' />
                     )}
                   </CommandItem>
@@ -114,11 +118,13 @@ export function NewChat({ users, onOpenChange, open }: NewChatProps) {
             </CommandList>
           </Command>
           <Button
-            variant={'default'}
-            onClick={() => showSubmittedData(selectedUsers)}
+            variant='default'
+            onClick={() =>
+              showSubmittedData(selectedUsers, 'Draft thread participants:')
+            }
             disabled={selectedUsers.length === 0}
           >
-            Chat
+            Create thread
           </Button>
         </div>
       </DialogContent>

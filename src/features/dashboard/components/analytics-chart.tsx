@@ -1,41 +1,13 @@
 import { Area, AreaChart, ResponsiveContainer, XAxis, YAxis } from 'recharts'
 
 const data = [
-  {
-    name: 'Mon',
-    clicks: Math.floor(Math.random() * 900) + 100,
-    uniques: Math.floor(Math.random() * 700) + 80,
-  },
-  {
-    name: 'Tue',
-    clicks: Math.floor(Math.random() * 900) + 100,
-    uniques: Math.floor(Math.random() * 700) + 80,
-  },
-  {
-    name: 'Wed',
-    clicks: Math.floor(Math.random() * 900) + 100,
-    uniques: Math.floor(Math.random() * 700) + 80,
-  },
-  {
-    name: 'Thu',
-    clicks: Math.floor(Math.random() * 900) + 100,
-    uniques: Math.floor(Math.random() * 700) + 80,
-  },
-  {
-    name: 'Fri',
-    clicks: Math.floor(Math.random() * 900) + 100,
-    uniques: Math.floor(Math.random() * 700) + 80,
-  },
-  {
-    name: 'Sat',
-    clicks: Math.floor(Math.random() * 900) + 100,
-    uniques: Math.floor(Math.random() * 700) + 80,
-  },
-  {
-    name: 'Sun',
-    clicks: Math.floor(Math.random() * 900) + 100,
-    uniques: Math.floor(Math.random() * 700) + 80,
-  },
+  { name: 'Mon', activity: 18, alerts: 2 },
+  { name: 'Tue', activity: 21, alerts: 4 },
+  { name: 'Wed', activity: 16, alerts: 3 },
+  { name: 'Thu', activity: 24, alerts: 5 },
+  { name: 'Fri', activity: 20, alerts: 2 },
+  { name: 'Sat', activity: 11, alerts: 1 },
+  { name: 'Sun', activity: 9, alerts: 1 },
 ]
 
 export function AnalyticsChart() {
@@ -57,7 +29,7 @@ export function AnalyticsChart() {
         />
         <Area
           type='monotone'
-          dataKey='clicks'
+          dataKey='activity'
           stroke='currentColor'
           className='text-primary'
           fill='currentColor'
@@ -65,7 +37,7 @@ export function AnalyticsChart() {
         />
         <Area
           type='monotone'
-          dataKey='uniques'
+          dataKey='alerts'
           stroke='currentColor'
           className='text-muted-foreground'
           fill='currentColor'

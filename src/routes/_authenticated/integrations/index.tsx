@@ -2,7 +2,7 @@ import z from 'zod'
 import { createFileRoute } from '@tanstack/react-router'
 import { Apps } from '@/features/apps'
 
-const appsSearchSchema = z.object({
+const integrationsSearchSchema = z.object({
   type: z
     .enum(['all', 'connected', 'notConnected'])
     .optional()
@@ -11,7 +11,7 @@ const appsSearchSchema = z.object({
   sort: z.enum(['asc', 'desc']).optional().catch(undefined),
 })
 
-export const Route = createFileRoute('/_authenticated/apps/')({
-  validateSearch: appsSearchSchema,
+export const Route = createFileRoute('/_authenticated/integrations/')({
+  validateSearch: integrationsSearchSchema,
   component: Apps,
 })

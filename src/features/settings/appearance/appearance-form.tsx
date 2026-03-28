@@ -77,7 +77,7 @@ export function AppearanceForm() {
                 <ChevronDownIcon className='absolute end-3 top-2.5 h-4 w-4 opacity-50' />
               </div>
               <FormDescription className='font-manrope'>
-                Set the font you want to use in the dashboard.
+                Set the font you want to use across the workspace shell.
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -90,7 +90,7 @@ export function AppearanceForm() {
             <FormItem>
               <FormLabel>Theme</FormLabel>
               <FormDescription>
-                Select the theme for the dashboard.
+                Select the theme for the workspace.
               </FormDescription>
               <FormMessage />
               <RadioGroup
@@ -155,7 +155,7 @@ export function AppearanceForm() {
           )}
         />
 
-        <Button type='submit'>Update preferences</Button>
+        <Button type='submit'>Save appearance</Button>
       </form>
     </Form>
   )

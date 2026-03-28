@@ -14,7 +14,7 @@ export function Tasks() {
   return (
     <TasksProvider>
       <Header fixed>
-        <Search />
+        <Search placeholder='Search operations queue' />
         <div className='ms-auto flex items-center space-x-4'>
           <ThemeSwitch />
           <ConfigDrawer />
@@ -25,9 +25,12 @@ export function Tasks() {
       <Main className='flex flex-1 flex-col gap-4 sm:gap-6'>
         <div className='flex flex-wrap items-end justify-between gap-2'>
           <div>
-            <h2 className='text-2xl font-bold tracking-tight'>Tasks</h2>
+            <h2 className='text-2xl font-bold tracking-tight'>
+              Operations Queue
+            </h2>
             <p className='text-muted-foreground'>
-              Here&apos;s a list of your tasks for this month!
+              Track governance, delivery, and integration work items that keep
+              the KAPAKA platform operational.
             </p>
           </div>
           <TasksPrimaryButtons />

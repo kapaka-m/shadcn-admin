@@ -34,23 +34,23 @@ export const tasksColumns: ColumnDef<Task>[] = [
   {
     accessorKey: 'id',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Task' />
+      <DataTableColumnHeader column={column} title='Work item' />
     ),
-    cell: ({ row }) => <div className='w-[80px]'>{row.getValue('id')}</div>,
+    cell: ({ row }) => <div className='w-[90px]'>{row.getValue('id')}</div>,
     enableSorting: false,
     enableHiding: false,
   },
   {
     accessorKey: 'title',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Title' />
+      <DataTableColumnHeader column={column} title='Summary' />
     ),
     meta: {
       className: 'ps-1 max-w-0 w-2/3',
       tdClassName: 'ps-4',
     },
     cell: ({ row }) => {
-      const label = labels.find((label) => label.value === row.original.label)
+      const label = labels.find((item) => item.value === row.original.label)
 
       return (
         <div className='flex space-x-2'>
@@ -68,7 +68,7 @@ export const tasksColumns: ColumnDef<Task>[] = [
     meta: { className: 'ps-1', tdClassName: 'ps-4' },
     cell: ({ row }) => {
       const status = statuses.find(
-        (status) => status.value === row.getValue('status')
+        (item) => item.value === row.getValue('status')
       )
 
       if (!status) {
@@ -77,16 +77,12 @@ export const tasksColumns: ColumnDef<Task>[] = [
 
       return (
         <div className='flex w-[100px] items-center gap-2'>
-          {status.icon && (
-            <status.icon className='size-4 text-muted-foreground' />
-          )}
+          <status.icon className='size-4 text-muted-foreground' />
           <span>{status.label}</span>
         </div>
       )
     },
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
-    },
+    filterFn: (row, id, value) => value.includes(row.getValue(id)),
   },
   {
     accessorKey: 'priority',
@@ -96,7 +92,7 @@ export const tasksColumns: ColumnDef<Task>[] = [
     meta: { className: 'ps-1', tdClassName: 'ps-3' },
     cell: ({ row }) => {
       const priority = priorities.find(
-        (priority) => priority.value === row.getValue('priority')
+        (item) => item.value === row.getValue('priority')
       )
 
       if (!priority) {
@@ -105,16 +101,12 @@ export const tasksColumns: ColumnDef<Task>[] = [
 
       return (
         <div className='flex items-center gap-2'>
-          {priority.icon && (
-            <priority.icon className='size-4 text-muted-foreground' />
-          )}
+          <priority.icon className='size-4 text-muted-foreground' />
           <span>{priority.label}</span>
         </div>
       )
     },
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
-    },
+    filterFn: (row, id, value) => value.includes(row.getValue(id)),
   },
   {
     id: 'actions',

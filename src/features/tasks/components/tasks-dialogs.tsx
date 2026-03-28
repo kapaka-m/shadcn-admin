@@ -51,19 +51,19 @@ export function TasksDialogs() {
               }, 500)
               showSubmittedData(
                 currentRow,
-                'The following task has been deleted:'
+                'The following work item has been removed:'
               )
             }}
             className='max-w-md'
-            title={`Delete this task: ${currentRow.id} ?`}
+            title={`Remove work item ${currentRow.id}?`}
             desc={
               <>
-                You are about to delete a task with the ID{' '}
+                You are about to remove the work item with the ID{' '}
                 <strong>{currentRow.id}</strong>. <br />
                 This action cannot be undone.
               </>
             }
-            confirmText='Delete'
+            confirmText='Remove'
           />
         </>
       )}

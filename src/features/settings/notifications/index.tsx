@@ -5,7 +5,7 @@ export function SettingsNotifications() {
   return (
     <ContentSection
       title='Notifications'
-      desc='Configure how you receive notifications.'
+      desc='Configure delivery, integration, finance, and security notification rules.'
     >
       <NotificationsForm />
     </ContentSection>

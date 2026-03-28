@@ -28,7 +28,7 @@ import { type Task } from '../data/schema'
 import { DataTableBulkActions } from './data-table-bulk-actions'
 import { tasksColumns as columns } from './tasks-columns'
 
-const route = getRouteApi('/_authenticated/tasks/')
+const route = getRouteApi('/_authenticated/operations/')
 
 type DataTableProps = {
   data: Task[]
@@ -113,17 +113,17 @@ export function TasksTable({ data }: DataTableProps) {
     >
       <DataTableToolbar
         table={table}
-        searchPlaceholder='Filter by title or ID...'
+        searchPlaceholder='Filter work items by summary or ID...'
         filters={[
           {
             columnId: 'status',
             title: 'Status',
-            options: statuses,
+            options: statuses.map((status) => ({ ...status })),
           },
           {
             columnId: 'priority',
             title: 'Priority',
-            options: priorities,
+            options: priorities.map((priority) => ({ ...priority })),
           },
         ]}
       />
@@ -183,7 +183,7 @@ export function TasksTable({ data }: DataTableProps) {
                   colSpan={columns.length}
                   className='h-24 text-center'
                 >
-                  No results.
+                  No work items found.
                 </TableCell>
               </TableRow>
             )}

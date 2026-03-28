@@ -1,5 +1,5 @@
 import { Outlet } from '@tanstack/react-router'
-import { Monitor, Bell, Palette, Wrench, UserCog } from 'lucide-react'
+import { Bell, Monitor, Palette, ShieldCheck, UserCog } from 'lucide-react'
 import { Separator } from '@/components/ui/separator'
 import { ConfigDrawer } from '@/components/config-drawer'
 import { Header } from '@/components/layout/header'
@@ -16,9 +16,9 @@ const sidebarNavItems = [
     icon: <UserCog size={18} />,
   },
   {
-    title: 'Account',
+    title: 'Access',
     href: '/settings/account',
-    icon: <Wrench size={18} />,
+    icon: <ShieldCheck size={18} />,
   },
   {
     title: 'Appearance',
@@ -31,7 +31,7 @@ const sidebarNavItems = [
     icon: <Bell size={18} />,
   },
   {
-    title: 'Display',
+    title: 'Navigation',
     href: '/settings/display',
     icon: <Monitor size={18} />,
   },
@@ -40,9 +40,8 @@ const sidebarNavItems = [
 export function Settings() {
   return (
     <>
-      {/* ===== Top Heading ===== */}
       <Header>
-        <Search />
+        <Search placeholder='Search workspace settings' />
         <div className='ms-auto flex items-center space-x-4'>
           <ThemeSwitch />
           <ConfigDrawer />
@@ -53,10 +52,11 @@ export function Settings() {
       <Main fixed>
         <div className='space-y-0.5'>
           <h1 className='text-2xl font-bold tracking-tight md:text-3xl'>
-            Settings
+            Workspace settings
           </h1>
           <p className='text-muted-foreground'>
-            Manage your account settings and set e-mail preferences.
+            Manage operator identity, access posture, notifications, and layout
+            preferences.
           </p>
         </div>
         <Separator className='my-4 lg:my-6' />

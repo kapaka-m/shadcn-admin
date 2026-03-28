@@ -5,7 +5,7 @@ export function SettingsProfile() {
   return (
     <ContentSection
       title='Profile'
-      desc='This is how others will see you on the site.'
+      desc='Control the operator identity that appears across the workspace shell.'
     >
       <ProfileForm />
     </ContentSection>

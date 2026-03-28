@@ -74,9 +74,9 @@ export function TasksImportDialog({
     >
       <DialogContent className='gap-2 sm:max-w-sm'>
         <DialogHeader className='text-start'>
-          <DialogTitle>Import Tasks</DialogTitle>
+          <DialogTitle>Import operations queue</DialogTitle>
           <DialogDescription>
-            Import tasks quickly from a CSV file.
+            Import work items from a CSV file for bulk review.
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
